@@ -1,0 +1,132 @@
+==7593== Memcheck, a memory error detector
+==7593== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==7593== Using Valgrind-3.17.0-07f0cdcbb4-20210319X and LibVEX; rerun with -h for copyright info
+==7593== Command: ./Lex infile3.txt outfile3.txt
+==7593== 
+--7593-- Valgrind options:
+--7593--    --leak-check=full
+--7593--    -v
+--7593-- Contents of /proc/version:
+--7593--   Linux version 3.10.0-1160.49.1.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Tue Nov 30 15:51:32 UTC 2021
+--7593-- 
+--7593-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--7593-- Page sizes: currently 4096, max supported 4096
+--7593-- Valgrind library directory: /opt/rh/devtoolset-11/root/usr/libexec/valgrind
+--7593-- Reading syms from /afs/cats.ucsc.edu/users/a/sfcarbal/CSE101_2/sfcarbal/pa1/Lex
+--7593-- Reading syms from /usr/lib64/ld-2.17.so
+--7593--   Considering /usr/lib/debug/.build-id/62/c449974331341bb08dcce3859560a22af1e172.debug ..
+--7593--   .. build-id is valid
+--7593-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/memcheck-amd64-linux
+--7593--    object doesn't have a symbol table
+--7593--    object doesn't have a dynamic symbol table
+--7593-- Scheduler: using generic scheduler lock implementation.
+--7593-- Reading suppressions file: /opt/rh/devtoolset-11/root/usr/libexec/valgrind/default.supp
+==7593== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-7593-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7593== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-7593-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7593== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-7593-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7593== 
+==7593== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==7593== don't want to do, unless you know exactly what you're doing,
+==7593== or are doing some strange experiment):
+==7593==   /opt/rh/devtoolset-11/root/usr/libexec/valgrind/../../bin/vgdb --pid=7593 ...command...
+==7593== 
+==7593== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==7593==   /path/to/gdb ./Lex
+==7593== and then give GDB the following command
+==7593==   target remote | /opt/rh/devtoolset-11/root/usr/libexec/valgrind/../../bin/vgdb --pid=7593
+==7593== --pid is optional if only one valgrind process is running
+==7593== 
+--7593-- REDIR: 0x4019e40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580cd495 (???)
+--7593-- REDIR: 0x4019c10 (ld-linux-x86-64.so.2:index) redirected to 0x580cd4af (???)
+--7593-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--7593-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==7593== WARNING: new redirection conflicts with existing -- ignoring it
+--7593--     old: 0x04019e40 (strlen              ) R-> (0000.0) 0x580cd495 ???
+--7593--     new: 0x04019e40 (strlen              ) R-> (2007.0) 0x04c30990 strlen
+--7593-- REDIR: 0x4019dc0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c31aa0 (strcmp)
+--7593-- REDIR: 0x401aa80 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35b30 (mempcpy)
+--7593-- Reading syms from /usr/lib64/libc-2.17.so
+--7593--   Considering /usr/lib/debug/.build-id/8d/a9707d518e88179b1b2903cd846c82102d84c1.debug ..
+--7593--   .. build-id is valid
+--7593-- REDIR: 0x4ecb1d0 (libc.so.6:strcasecmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4ec7f40 (libc.so.6:strnlen) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4ecd4d0 (libc.so.6:strncasecmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4eca9a0 (libc.so.6:memset) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4eca950 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4ec9930 (libc.so.6:__GI_strrchr) redirected to 0x4c30350 (__GI_strrchr)
+--7593-- REDIR: 0x4ec0740 (libc.so.6:malloc) redirected to 0x4c2afe0 (malloc)
+--7593-- REDIR: 0x4ee0a10 (libc.so.6:__GI_strstr) redirected to 0x4c35dc0 (__strstr_sse2)
+--7593-- REDIR: 0x4eca030 (libc.so.6:memchr) redirected to 0x4c31b40 (memchr)
+--7593-- REDIR: 0x4ecfc30 (libc.so.6:__GI_memcpy) redirected to 0x4c32750 (__GI_memcpy)
+--7593-- REDIR: 0x4ed14b0 (libc.so.6:strchrnul) redirected to 0x4c35650 (strchrnul)
+--7593-- REDIR: 0x4ecab70 (libc.so.6:__GI_mempcpy) redirected to 0x4c35860 (__GI_mempcpy)
+--7593-- REDIR: 0x4ec0b60 (libc.so.6:free) redirected to 0x4c2d566 (free)
+--7593-- REDIR: 0x4ec1160 (libc.so.6:calloc) redirected to 0x4c2f72e (calloc)
+--7593-- REDIR: 0x4ec7850 (libc.so.6:strcpy) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4ed57d0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c309b0 (strcpy)
+--7593-- REDIR: 0x4ec63c0 (libc.so.6:strcmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7593-- REDIR: 0x4f79fc0 (libc.so.6:__strcmp_sse42) redirected to 0x4c31a50 (__strcmp_sse42)
+--7593-- REDIR: 0x4ec7e60 (libc.so.6:__GI_strlen) redirected to 0x4c308f0 (__GI_strlen)
+Line_Count: 13
+Array[0]: ====
+Array[1]: sometimes tokens
+Array[2]: may appear in tests
+Array[3]: so you better
+Array[4]: write your program
+Array[5]: in accordance with
+Array[6]: the instructions set
+Array[7]: out in the PDF
+Array[8]: =====
+Array[9]: seriously all you
+Array[10]: have to do is treat
+Array[11]: every line as a single string
+Array[12]: ===
+GG: ====
+GG: sometimes tokens
+GG: may appear in tests
+GG: so you better
+GG: write your program
+GG: in accordance with
+GG: the instructions set
+GG: out in the PDF
+GG: =====
+GG: seriously all you
+GG: have to do is treat
+GG: every line as a single string
+GG: ===
+Index_Count: 13
+Comparing write your program
+ and sometimes tokens
+strcmp Not Working
+Append
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+==7593== 
+==7593== HEAP SUMMARY:
+==7593==     in use at exit: 3,900 bytes in 13 blocks
+==7593==   total heap usage: 30 allocs, 17 frees, 5,484 bytes allocated
+==7593== 
+==7593== Searching for pointers to 13 not-freed blocks
+==7593== Checked 70,272 bytes
+==7593== 
+==7593== 3,900 bytes in 13 blocks are definitely lost in loss record 1 of 1
+==7593==    at 0x4C2F7C8: calloc (vg_replace_malloc.c:1117)
+==7593==    by 0x40137A: main (Lex.c:56)
+==7593== 
+==7593== LEAK SUMMARY:
+==7593==    definitely lost: 3,900 bytes in 13 blocks
+==7593==    indirectly lost: 0 bytes in 0 blocks
+==7593==      possibly lost: 0 bytes in 0 blocks
+==7593==    still reachable: 0 bytes in 0 blocks
+==7593==         suppressed: 0 bytes in 0 blocks
+==7593== 
+==7593== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

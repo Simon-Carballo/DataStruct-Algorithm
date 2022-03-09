@@ -1,0 +1,3093 @@
+==7583== Memcheck, a memory error detector
+==7583== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==7583== Using Valgrind-3.17.0-07f0cdcbb4-20210319X and LibVEX; rerun with -h for copyright info
+==7583== Command: ./Lex infile2.txt outfile2.txt
+==7583== 
+--7583-- Valgrind options:
+--7583--    --leak-check=full
+--7583--    -v
+--7583-- Contents of /proc/version:
+--7583--   Linux version 3.10.0-1160.49.1.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Tue Nov 30 15:51:32 UTC 2021
+--7583-- 
+--7583-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--7583-- Page sizes: currently 4096, max supported 4096
+--7583-- Valgrind library directory: /opt/rh/devtoolset-11/root/usr/libexec/valgrind
+--7583-- Reading syms from /afs/cats.ucsc.edu/users/a/sfcarbal/CSE101_2/sfcarbal/pa1/Lex
+--7583-- Reading syms from /usr/lib64/ld-2.17.so
+--7583--   Considering /usr/lib/debug/.build-id/62/c449974331341bb08dcce3859560a22af1e172.debug ..
+--7583--   .. build-id is valid
+--7583-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/memcheck-amd64-linux
+--7583--    object doesn't have a symbol table
+--7583--    object doesn't have a dynamic symbol table
+--7583-- Scheduler: using generic scheduler lock implementation.
+--7583-- Reading suppressions file: /opt/rh/devtoolset-11/root/usr/libexec/valgrind/default.supp
+==7583== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-7583-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7583== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-7583-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7583== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-7583-by-sfcarbal-on-unix1.lt.ucsc.edu
+==7583== 
+==7583== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==7583== don't want to do, unless you know exactly what you're doing,
+==7583== or are doing some strange experiment):
+==7583==   /opt/rh/devtoolset-11/root/usr/libexec/valgrind/../../bin/vgdb --pid=7583 ...command...
+==7583== 
+==7583== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==7583==   /path/to/gdb ./Lex
+==7583== and then give GDB the following command
+==7583==   target remote | /opt/rh/devtoolset-11/root/usr/libexec/valgrind/../../bin/vgdb --pid=7583
+==7583== --pid is optional if only one valgrind process is running
+==7583== 
+--7583-- REDIR: 0x4019e40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580cd495 (???)
+--7583-- REDIR: 0x4019c10 (ld-linux-x86-64.so.2:index) redirected to 0x580cd4af (???)
+--7583-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--7583-- Reading syms from /opt/rh/devtoolset-11/root/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==7583== WARNING: new redirection conflicts with existing -- ignoring it
+--7583--     old: 0x04019e40 (strlen              ) R-> (0000.0) 0x580cd495 ???
+--7583--     new: 0x04019e40 (strlen              ) R-> (2007.0) 0x04c30990 strlen
+--7583-- REDIR: 0x4019dc0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c31aa0 (strcmp)
+--7583-- REDIR: 0x401aa80 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35b30 (mempcpy)
+--7583-- Reading syms from /usr/lib64/libc-2.17.so
+--7583--   Considering /usr/lib/debug/.build-id/8d/a9707d518e88179b1b2903cd846c82102d84c1.debug ..
+--7583--   .. build-id is valid
+--7583-- REDIR: 0x4ecb1d0 (libc.so.6:strcasecmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4ec7f40 (libc.so.6:strnlen) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4ecd4d0 (libc.so.6:strncasecmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4eca9a0 (libc.so.6:memset) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4eca950 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4ec9930 (libc.so.6:__GI_strrchr) redirected to 0x4c30350 (__GI_strrchr)
+--7583-- REDIR: 0x4ec0740 (libc.so.6:malloc) redirected to 0x4c2afe0 (malloc)
+--7583-- REDIR: 0x4ee0a10 (libc.so.6:__GI_strstr) redirected to 0x4c35dc0 (__strstr_sse2)
+--7583-- REDIR: 0x4eca030 (libc.so.6:memchr) redirected to 0x4c31b40 (memchr)
+--7583-- REDIR: 0x4ecfc30 (libc.so.6:__GI_memcpy) redirected to 0x4c32750 (__GI_memcpy)
+--7583-- REDIR: 0x4ed14b0 (libc.so.6:strchrnul) redirected to 0x4c35650 (strchrnul)
+--7583-- REDIR: 0x4ecab70 (libc.so.6:__GI_mempcpy) redirected to 0x4c35860 (__GI_mempcpy)
+--7583-- REDIR: 0x4ec0b60 (libc.so.6:free) redirected to 0x4c2d566 (free)
+--7583-- REDIR: 0x4ec1160 (libc.so.6:calloc) redirected to 0x4c2f72e (calloc)
+--7583-- REDIR: 0x4ec7850 (libc.so.6:strcpy) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4ed57d0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c309b0 (strcpy)
+Line_Count: 1000
+Array[0]: Macrochires
+Array[1]: stylopodium
+Array[2]: dawn
+Array[3]: ignoration
+Array[4]: scrutinization
+Array[5]: parviflorous
+Array[6]: anemopathy
+Array[7]: evocatory
+Array[8]: inmate
+Array[9]: rectricial
+Array[10]: nonrelativity
+Array[11]: Sango
+Array[12]: quasi-realistic
+Array[13]: Pan-Arabic
+Array[14]: Hebrew
+Array[15]: base-ball
+Array[16]: antineutrons
+Array[17]: stockwork
+Array[18]: BSRT
+Array[19]: Criders
+Array[20]: Collbaith
+Array[21]: legitim
+Array[22]: rouged
+Array[23]: nonbody
+Array[24]: Selene
+Array[25]: overmarch
+Array[26]: vivificated
+Array[27]: mesosomatic
+Array[28]: multiview
+Array[29]: athletism
+Array[30]: amalgamation
+Array[31]: gramineous
+Array[32]: payably
+Array[33]: cacodylate
+Array[34]: lintiest
+Array[35]: l-arterenol
+Array[36]: Protobasidii
+Array[37]: hyaloliparite
+Array[38]: life-enriching
+Array[39]: dollship
+Array[40]: theorically
+Array[41]: impressionable
+Array[42]: screek
+Array[43]: metal-sheathed
+Array[44]: pellucidly
+Array[45]: simianity
+Array[46]: Germanton
+Array[47]: Poiana
+Array[48]: pre-emptor
+Array[49]: transferrotype
+Array[50]: Kiel
+Array[51]: siccar
+Array[52]: high-flavored
+Array[53]: re-enjoy
+Array[54]: interluency
+Array[55]: wonton
+Array[56]: skier
+Array[57]: foreseat
+Array[58]: Gymnasium
+Array[59]: Min
+Array[60]: catty-corner
+Array[61]: perron
+Array[62]: medics
+Array[63]: Otariidae
+Array[64]: Linanthus
+Array[65]: florins
+Array[66]: deafly
+Array[67]: premodeled
+Array[68]: spoons
+Array[69]: horol.
+Array[70]: Nierstein
+Array[71]: gunreach
+Array[72]: bonzer
+Array[73]: imbitters
+Array[74]: Gaige
+Array[75]: syntactially
+Array[76]: BUR
+Array[77]: thoracicoacromial
+Array[78]: primed
+Array[79]: correctable
+Array[80]: anticipatorily
+Array[81]: AFB
+Array[82]: sassandra
+Array[83]: boanerges
+Array[84]: accidentarily
+Array[85]: statesboy
+Array[86]: dosimetries
+Array[87]: Keos
+Array[88]: Sara
+Array[89]: preponderate
+Array[90]: red-swelling
+Array[91]: wedgebill
+Array[92]: overhoping
+Array[93]: hallucinated
+Array[94]: aminoazo
+Array[95]: water-living
+Array[96]: unsparred
+Array[97]: regamble
+Array[98]: overprint
+Array[99]: Logi
+Array[100]: swaths
+Array[101]: hotch
+Array[102]: triticism
+Array[103]: Slavo-lithuanian
+Array[104]: oxyluminescence
+Array[105]: Keelung
+Array[106]: therologist
+Array[107]: unnitrogenous
+Array[108]: bolting
+Array[109]: orthoplasy
+Array[110]: papalise
+Array[111]: Viipuri
+Array[112]: interdebating
+Array[113]: ingratitudes
+Array[114]: unbedecked
+Array[115]: uninnocent
+Array[116]: luffer
+Array[117]: chondroitin
+Array[118]: rust-cankered
+Array[119]: Douglasville
+Array[120]: mealymouthedness
+Array[121]: nuts
+Array[122]: subventitious
+Array[123]: interpubic
+Array[124]: amuyong
+Array[125]: heart-hardened
+Array[126]: saints
+Array[127]: dissociality
+Array[128]: benumbment
+Array[129]: camillus
+Array[130]: Lach
+Array[131]: anthraquinol
+Array[132]: Moche
+Array[133]: nonprocedural
+Array[134]: eucalyptic
+Array[135]: precardiac
+Array[136]: redespise
+Array[137]: phytoecological
+Array[138]: unpalled
+Array[139]: sepulchres
+Array[140]: Burrton
+Array[141]: oil-laden
+Array[142]: Bogalusa
+Array[143]: bronchiloquy
+Array[144]: Haughton
+Array[145]: bementite
+Array[146]: Anglo-afghan
+Array[147]: beglerbegship
+Array[148]: winches
+Array[149]: antonomasia
+Array[150]: presubscriber
+Array[151]: Hazelcrest
+Array[152]: Denn
+Array[153]: dilling
+Array[154]: Flindersia
+Array[155]: equisetic
+Array[156]: groundsman
+Array[157]: brattishing
+Array[158]: dysanagnosia
+Array[159]: bastioned
+Array[160]: reprimandingly
+Array[161]: rose-hued
+Array[162]: fogbows
+Array[163]: aims
+Array[164]: saloop
+Array[165]: acidific
+Array[166]: movie
+Array[167]: unfrilled
+Array[168]: Christ-borne
+Array[169]: prosopographical
+Array[170]: euphroes
+Array[171]: oligacanthous
+Array[172]: balneation
+Array[173]: archgod
+Array[174]: intraspecies
+Array[175]: unsignificant
+Array[176]: anti-Roman
+Array[177]: pseudofluctuation
+Array[178]: Chetnik
+Array[179]: sauropsidan
+Array[180]: Loxiinae
+Array[181]: blowy
+Array[182]: pyknoses
+Array[183]: Morrison
+Array[184]: apologete
+Array[185]: ovoplasmic
+Array[186]: vaporoseness
+Array[187]: outflanks
+Array[188]: turnmeter
+Array[189]: acetabular
+Array[190]: frumpish
+Array[191]: adelantados
+Array[192]: Tarnopol
+Array[193]: matchboxes
+Array[194]: pupfishes
+Array[195]: reconfined
+Array[196]: worldly-mindedness
+Array[197]: major-leaguer
+Array[198]: streamingly
+Array[199]: consultants
+Array[200]: Agricola
+Array[201]: Robinsonville
+Array[202]: sol
+Array[203]: self-immurement
+Array[204]: goose-quill
+Array[205]: essayish
+Array[206]: Polyctenidae
+Array[207]: remerging
+Array[208]: self-cruelty
+Array[209]: gegger
+Array[210]: unpredicably
+Array[211]: wharfages
+Array[212]: Leno
+Array[213]: extrahazardous
+Array[214]: nonmischievous
+Array[215]: sulfurized
+Array[216]: microdontous
+Array[217]: confessionalian
+Array[218]: palliditarsate
+Array[219]: superinsist
+Array[220]: backspang
+Array[221]: fit
+Array[222]: capework
+Array[223]: circumradii
+Array[224]: scabiophobia
+Array[225]: treacheries
+Array[226]: anallagmatis
+Array[227]: stuber
+Array[228]: miniver
+Array[229]: dinsome
+Array[230]: Creel
+Array[231]: urinations
+Array[232]: supplicatingly
+Array[233]: fullfaces
+Array[234]: smoothnesses
+Array[235]: snowflower
+Array[236]: crannogs
+Array[237]: epihyal
+Array[238]: platinamin
+Array[239]: squirelet
+Array[240]: marsalas
+Array[241]: Tyndareus
+Array[242]: index
+Array[243]: tide-locked
+Array[244]: Gauntlett
+Array[245]: Asellidae
+Array[246]: eccyclema
+Array[247]: daisy-painted
+Array[248]: navicerts
+Array[249]: hinderance
+Array[250]: nonparabolic
+Array[251]: yerking
+Array[252]: well-erected
+Array[253]: quarterbacking
+Array[254]: akhara
+Array[255]: understriking
+Array[256]: unconfinement
+Array[257]: funicular
+Array[258]: tuedian
+Array[259]: unmaniable
+Array[260]: bioelectrical
+Array[261]: psalteteria
+Array[262]: rewardingness
+Array[263]: overcurtain
+Array[264]: nitrotoluol
+Array[265]: Illinois
+Array[266]: phycocolloid
+Array[267]: Spartansburg
+Array[268]: 1080
+Array[269]: morassy
+Array[270]: -form
+Array[271]: walkways
+Array[272]: mites
+Array[273]: Bhutia
+Array[274]: diffidence
+Array[275]: murthering
+Array[276]: monoblepsis
+Array[277]: nonalphabetically
+Array[278]: anchietine
+Array[279]: grayling
+Array[280]: defaillance
+Array[281]: inscribable
+Array[282]: predestinationism
+Array[283]: leach
+Array[284]: yachtmanship
+Array[285]: debuted
+Array[286]: mammilliform
+Array[287]: Wovoka
+Array[288]: phantic
+Array[289]: lame-brain
+Array[290]: vesico-umbilical
+Array[291]: chloroleucite
+Array[292]: six-shafted
+Array[293]: foolmonger
+Array[294]: merrymake
+Array[295]: forebespeak
+Array[296]: claros
+Array[297]: handbells
+Array[298]: Politian
+Array[299]: scarcen
+Array[300]: brain-crumpled
+Array[301]: unseemingly
+Array[302]: chawbuck
+Array[303]: superscribe
+Array[304]: baby-face
+Array[305]: unpetted
+Array[306]: Mangifera
+Array[307]: felonwort
+Array[308]: riddled
+Array[309]: pinnoite
+Array[310]: polyphyletically
+Array[311]: Hulme
+Array[312]: Pucciniaceae
+Array[313]: swindlership
+Array[314]: Nolanville
+Array[315]: pastors
+Array[316]: appersonation
+Array[317]: postdiscoidal
+Array[318]: Susy
+Array[319]: patroclinous
+Array[320]: home-loving
+Array[321]: Zoanthus
+Array[322]: slim-waisted
+Array[323]: Deschutes
+Array[324]: unpuckers
+Array[325]: seacatch
+Array[326]: landlike
+Array[327]: poach
+Array[328]: retransplants
+Array[329]: besnowing
+Array[330]: Judean
+Array[331]: practicableness
+Array[332]: spacetime
+Array[333]: SMASPU
+Array[334]: unbreakable
+Array[335]: titanoniobate
+Array[336]: misdeserve
+Array[337]: Plumularia
+Array[338]: Laertiades
+Array[339]: nontropical
+Array[340]: abulic
+Array[341]: unvulgarized
+Array[342]: Volos
+Array[343]: egoistic
+Array[344]: Gardnerville
+Array[345]: both
+Array[346]: coparent
+Array[347]: Xenocrates
+Array[348]: emma
+Array[349]: desponder
+Array[350]: raspy
+Array[351]: browsability
+Array[352]: doolfu
+Array[353]: gammerel
+Array[354]: setarious
+Array[355]: pessimism
+Array[356]: prescribable
+Array[357]: howling
+Array[358]: contradictory
+Array[359]: well-prosecuted
+Array[360]: awabi
+Array[361]: white-fleshed
+Array[362]: table-faced
+Array[363]: Neopilina
+Array[364]: Sebright
+Array[365]: competencies
+Array[366]: hysteriac
+Array[367]: BLOBS
+Array[368]: Cetraria
+Array[369]: processionalist
+Array[370]: entangler
+Array[371]: gonal
+Array[372]: oreodontine
+Array[373]: go-getterism
+Array[374]: Ali
+Array[375]: concordant
+Array[376]: freehandedness
+Array[377]: Wascott
+Array[378]: trachelo-
+Array[379]: belick
+Array[380]: Lycopodiales
+Array[381]: ungradually
+Array[382]: muster-out
+Array[383]: semidisk
+Array[384]: wigs
+Array[385]: hag
+Array[386]: actuaries
+Array[387]: tatters
+Array[388]: kneehole
+Array[389]: retabulate
+Array[390]: homoptera
+Array[391]: bord-and-pillar
+Array[392]: kahawai
+Array[393]: stagnates
+Array[394]: rennase
+Array[395]: edward
+Array[396]: herbrough
+Array[397]: DP
+Array[398]: Tupis
+Array[399]: wappenschaw
+Array[400]: Pennatulidae
+Array[401]: nudniks
+Array[402]: broadband
+Array[403]: Gildea
+Array[404]: dusenwind
+Array[405]: revealingness
+Array[406]: semble
+Array[407]: chelonin
+Array[408]: guaiocums
+Array[409]: aptly
+Array[410]: pseudoskink
+Array[411]: elevons
+Array[412]: undecreasingly
+Array[413]: wrothsome
+Array[414]: elaine
+Array[415]: armorist
+Array[416]: philotechnical
+Array[417]: Waylan
+Array[418]: summered
+Array[419]: topsiders
+Array[420]: Nimocks
+Array[421]: feudists
+Array[422]: Iva
+Array[423]: calories
+Array[424]: Buerger
+Array[425]: multibreak
+Array[426]: zorils
+Array[427]: sipidity
+Array[428]: stoothing
+Array[429]: butterflylike
+Array[430]: lecanoscopic
+Array[431]: listable
+Array[432]: bridoons
+Array[433]: Raninae
+Array[434]: fortyish
+Array[435]: cancellated
+Array[436]: diaplexus
+Array[437]: omnifacial
+Array[438]: harsh-grating
+Array[439]: carabideous
+Array[440]: psychoprophylaxis
+Array[441]: lituiform
+Array[442]: subpeltated
+Array[443]: synaptene
+Array[444]: undermanning
+Array[445]: still-continuing
+Array[446]: shallow-brained
+Array[447]: paraphilia
+Array[448]: telecinematography
+Array[449]: ethanols
+Array[450]: irritative
+Array[451]: sensiferous
+Array[452]: untimbered
+Array[453]: shriller
+Array[454]: news-seeking
+Array[455]: fluorinates
+Array[456]: obsessiveness
+Array[457]: mercantility
+Array[458]: dungannonite
+Array[459]: BEE
+Array[460]: clearinghouse
+Array[461]: banjo
+Array[462]: mashing
+Array[463]: Doelling
+Array[464]: trichocystic
+Array[465]: ferocity
+Array[466]: Kasubian
+Array[467]: ruby-eyed
+Array[468]: peregrinations
+Array[469]: allochromatic
+Array[470]: coccus
+Array[471]: residentially
+Array[472]: self-repugnance
+Array[473]: Hochman
+Array[474]: bitter-endism
+Array[475]: Maeander
+Array[476]: maras
+Array[477]: Aggarwal
+Array[478]: Casatus
+Array[479]: adjustage
+Array[480]: Millda
+Array[481]: raffishnesses
+Array[482]: malfunction
+Array[483]: syllabary
+Array[484]: nonsubstitution
+Array[485]: outbear
+Array[486]: cerebellums
+Array[487]: Chaldaical
+Array[488]: counterchanged
+Array[489]: dicoelous
+Array[490]: glassblower
+Array[491]: unstrengthening
+Array[492]: outperform
+Array[493]: Cos
+Array[494]: telosynaptic
+Array[495]: delayage
+Array[496]: louisville
+Array[497]: covariant
+Array[498]: jampan
+Array[499]: stentorine
+Array[500]: chronotropism
+Array[501]: penuckles
+Array[502]: Viscount
+Array[503]: deganglionate
+Array[504]: Rhynd
+Array[505]: think
+Array[506]: centranth
+Array[507]: tsimmes
+Array[508]: surfeit-swelled
+Array[509]: sneaped
+Array[510]: monopody
+Array[511]: unhent
+Array[512]: gloat
+Array[513]: kyanol
+Array[514]: zephyr-fanned
+Array[515]: excitingly
+Array[516]: holl
+Array[517]: unitemized
+Array[518]: purushartha
+Array[519]: farthings
+Array[520]: cardamine
+Array[521]: coffee-brown
+Array[522]: ultracrepidarian
+Array[523]: Half-moslem
+Array[524]: unenterable
+Array[525]: crystallizations
+Array[526]: phenotype
+Array[527]: sadhika
+Array[528]: assonantic
+Array[529]: reinspire
+Array[530]: computerizes
+Array[531]: schoolbooks
+Array[532]: row-boat
+Array[533]: ironheartedly
+Array[534]: subjunct
+Array[535]: pleasure-tired
+Array[536]: Darra
+Array[537]: osoberry
+Array[538]: decriminalization
+Array[539]: unmitred
+Array[540]: escallops
+Array[541]: finespun
+Array[542]: tafwiz
+Array[543]: diachyma
+Array[544]: RITA
+Array[545]: while
+Array[546]: tam-o'-shanter
+Array[547]: Lavallette
+Array[548]: Kitasato
+Array[549]: relegating
+Array[550]: sextodecimos
+Array[551]: expectorant
+Array[552]: mauds
+Array[553]: Scorpaenidae
+Array[554]: auxology
+Array[555]: cotillage
+Array[556]: trueheartedly
+Array[557]: betroths
+Array[558]: unsafeguarded
+Array[559]: seminasal
+Array[560]: outyells
+Array[561]: unfinable
+Array[562]: hydrolytically
+Array[563]: wisha
+Array[564]: prohydrotropic
+Array[565]: cormogen
+Array[566]: preinquisition
+Array[567]: hylology
+Array[568]: hypolimnionia
+Array[569]: pedocal
+Array[570]: planform
+Array[571]: transporters
+Array[572]: gnomists
+Array[573]: neshly
+Array[574]: quadrifrontal
+Array[575]: cut-price
+Array[576]: photomacrography
+Array[577]: noncompensating
+Array[578]: soreheads
+Array[579]: gallicola
+Array[580]: afterdrain
+Array[581]: winkled
+Array[582]: Obeid
+Array[583]: uniform
+Array[584]: spring-board
+Array[585]: clumproot
+Array[586]: packinghouse
+Array[587]: nonfeasibility
+Array[588]: oddness
+Array[589]: novelised
+Array[590]: fadding
+Array[591]: songlike
+Array[592]: respring
+Array[593]: prevariation
+Array[594]: gourdworm
+Array[595]: Pyrosomatidae
+Array[596]: uncorven
+Array[597]: Araxa
+Array[598]: techiness
+Array[599]: bleached
+Array[600]: shide
+Array[601]: hook-snouted
+Array[602]: MFT
+Array[603]: superdevilishly
+Array[604]: catechizer
+Array[605]: Treron
+Array[606]: RIM
+Array[607]: intendency
+Array[608]: entrapment
+Array[609]: tripaschal
+Array[610]: heyduck
+Array[611]: spirit-chilling
+Array[612]: Changoan
+Array[613]: all-availing
+Array[614]: unagreed
+Array[615]: whoremongering
+Array[616]: immunogenetic
+Array[617]: mislighting
+Array[618]: semisocialistically
+Array[619]: korona
+Array[620]: sperone
+Array[621]: Berkley
+Array[622]: Rallinae
+Array[623]: Audras
+Array[624]: glucosidase
+Array[625]: arsenetted
+Array[626]: longhairs
+Array[627]: unexplainably
+Array[628]: halbert
+Array[629]: castles
+Array[630]: readdicting
+Array[631]: Mansura
+Array[632]: towelry
+Array[633]: civilise
+Array[634]: Violaceae
+Array[635]: vice-architect
+Array[636]: impersonate
+Array[637]: keynesian
+Array[638]: aspheric
+Array[639]: demagnetized
+Array[640]: pig-footed
+Array[641]: hemihedron
+Array[642]: Jezabella
+Array[643]: trigonometrical
+Array[644]: fricandelle
+Array[645]: Ector
+Array[646]: toccate
+Array[647]: antecedaneous
+Array[648]: heterophagous
+Array[649]: USSCt
+Array[650]: nose-up
+Array[651]: noonday
+Array[652]: ventricolumna
+Array[653]: spectroheliography
+Array[654]: kinetomeric
+Array[655]: silicifluoride
+Array[656]: unarousable
+Array[657]: Sharpsburg
+Array[658]: falderols
+Array[659]: shittier
+Array[660]: sieva
+Array[661]: soller
+Array[662]: byssi
+Array[663]: cell
+Array[664]: preacquitting
+Array[665]: Nanuet
+Array[666]: Derbent
+Array[667]: Beckman
+Array[668]: isosulphocyanate
+Array[669]: deperdite
+Array[670]: montmorillonitic
+Array[671]: bilinguist
+Array[672]: Jack-the-rags
+Array[673]: ambulacrum
+Array[674]: quincewort
+Array[675]: breech-loading
+Array[676]: soundheartedness
+Array[677]: commissionating
+Array[678]: clinah
+Array[679]: Erma
+Array[680]: Monahon
+Array[681]: prefertility
+Array[682]: grip
+Array[683]: emyde
+Array[684]: Elsey
+Array[685]: orality
+Array[686]: terrestriality
+Array[687]: nonheritability
+Array[688]: embolimeal
+Array[689]: spifflicate
+Array[690]: subchief
+Array[691]: Balanta
+Array[692]: tony
+Array[693]: ionomers
+Array[694]: Midway
+Array[695]: inexistency
+Array[696]: Tazewell
+Array[697]: frolicful
+Array[698]: djakarta
+Array[699]: Stannwood
+Array[700]: Scheel
+Array[701]: nonsegregable
+Array[702]: misshaped
+Array[703]: dandy-roller
+Array[704]: cross-pawl
+Array[705]: deciduitis
+Array[706]: heirship
+Array[707]: preconfiguration
+Array[708]: Torun
+Array[709]: fiddle-faddled
+Array[710]: slows
+Array[711]: child-mindedness
+Array[712]: flavorousness
+Array[713]: Francoist
+Array[714]: thy
+Array[715]: cunningness
+Array[716]: tepetate
+Array[717]: expurgational
+Array[718]: cps
+Array[719]: jorums
+Array[720]: inflexion
+Array[721]: pixies
+Array[722]: steel-digesting
+Array[723]: ornary
+Array[724]: electrography
+Array[725]: Opilia
+Array[726]: hyperelegantly
+Array[727]: Potosi
+Array[728]: bidgee-widgee
+Array[729]: bout
+Array[730]: kodaking
+Array[731]: Jenette
+Array[732]: rogueling
+Array[733]: single-hoofed
+Array[734]: yawney
+Array[735]: sunspottery
+Array[736]: Cariocan
+Array[737]: skyjacks
+Array[738]: tewly
+Array[739]: acroataxia
+Array[740]: conveyability
+Array[741]: Cahuapana
+Array[742]: Qum
+Array[743]: scissor-winged
+Array[744]: gaster-
+Array[745]: ten-dollar
+Array[746]: birds
+Array[747]: underclift
+Array[748]: Pan-mongolian
+Array[749]: pro-Egyptian
+Array[750]: misanthropi
+Array[751]: chirimen
+Array[752]: aywhere
+Array[753]: adsmith
+Array[754]: plie
+Array[755]: isocarbostyril
+Array[756]: parotidean
+Array[757]: unwry
+Array[758]: uppent
+Array[759]: endophasia
+Array[760]: neuroplasm
+Array[761]: hissel
+Array[762]: velds
+Array[763]: she-fool
+Array[764]: attatches
+Array[765]: overbookish
+Array[766]: coracomandibular
+Array[767]: Pimpinella
+Array[768]: Levant
+Array[769]: tapadera
+Array[770]: maat
+Array[771]: Engedi
+Array[772]: poppy-flowered
+Array[773]: demodulator
+Array[774]: overshadower
+Array[775]: raclettes
+Array[776]: pulpitical
+Array[777]: unlearnableness
+Array[778]: countersconce
+Array[779]: close-bred
+Array[780]: junks
+Array[781]: earthiest
+Array[782]: proud-minded
+Array[783]: disponed
+Array[784]: colophonate
+Array[785]: paradigm
+Array[786]: Vasti
+Array[787]: unduchess
+Array[788]: Ucalegon
+Array[789]: tweed
+Array[790]: vrows
+Array[791]: megaton
+Array[792]: drunkest
+Array[793]: Habiru
+Array[794]: Tetrabelodon
+Array[795]: palatomaxillary
+Array[796]: toluyl
+Array[797]: hypersuggestibleness
+Array[798]: samites
+Array[799]: Fusulina
+Array[800]: flamelike
+Array[801]: pettygod
+Array[802]: Auster
+Array[803]: unrespectiveness
+Array[804]: kangaroo-rat
+Array[805]: ghostcraft
+Array[806]: Piscataqua
+Array[807]: graphiological
+Array[808]: Arica
+Array[809]: Croesus
+Array[810]: greeny
+Array[811]: ichorrhemia
+Array[812]: disassembler
+Array[813]: enneahedral
+Array[814]: splenolymphatic
+Array[815]: zamarra
+Array[816]: Geoffry
+Array[817]: consence
+Array[818]: fourteens
+Array[819]: neck-tie
+Array[820]: nonirate
+Array[821]: parental
+Array[822]: detritus
+Array[823]: uncensured
+Array[824]: umpteenth
+Array[825]: twice-negotiated
+Array[826]: exhilarator
+Array[827]: intervisitation
+Array[828]: Charlena
+Array[829]: mucronated
+Array[830]: Ongun
+Array[831]: epencephalons
+Array[832]: generous-hearted
+Array[833]: encoring
+Array[834]: Krusche
+Array[835]: Huntersville
+Array[836]: black-tressed
+Array[837]: jocooserie
+Array[838]: inclinable
+Array[839]: motiving
+Array[840]: pickthatch
+Array[841]: abeigh
+Array[842]: Myrtle
+Array[843]: wage-plug
+Array[844]: latibulize
+Array[845]: overtensely
+Array[846]: beanbag
+Array[847]: Oceola
+Array[848]: untwist
+Array[849]: rebounded
+Array[850]: stripteased
+Array[851]: instigated
+Array[852]: ditches
+Array[853]: conichalcite
+Array[854]: shortenings
+Array[855]: opaled
+Array[856]: herrenvolk
+Array[857]: rehaul
+Array[858]: fantailed
+Array[859]: methobromide
+Array[860]: unclouding
+Array[861]: coinquinate
+Array[862]: throned
+Array[863]: Brabazon
+Array[864]: lobotomized
+Array[865]: Marilou
+Array[866]: trainmaster
+Array[867]: Ardra
+Array[868]: drivellingly
+Array[869]: Lerona
+Array[870]: jaunder
+Array[871]: idiasm
+Array[872]: overextends
+Array[873]: disconvenient
+Array[874]: Aphelops
+Array[875]: suffixion
+Array[876]: disfellowship
+Array[877]: laparohepatotomy
+Array[878]: filbert
+Array[879]: cinderman
+Array[880]: sociogram
+Array[881]: pompoms
+Array[882]: painkilling
+Array[883]: Mahabharata
+Array[884]: dudine
+Array[885]: Hannastown
+Array[886]: Henka
+Array[887]: mazes
+Array[888]: ravishedly
+Array[889]: peats
+Array[890]: fault-slip
+Array[891]: nasiform
+Array[892]: devouringly
+Array[893]: substalagmite
+Array[894]: uraline
+Array[895]: Melisandra
+Array[896]: non-English
+Array[897]: cufflinks
+Array[898]: unredemptive
+Array[899]: guidwife
+Array[900]: Evans
+Array[901]: anise
+Array[902]: unsymbolized
+Array[903]: tinkerwise
+Array[904]: repenalize
+Array[905]: recidivous
+Array[906]: dipppier
+Array[907]: quenelle
+Array[908]: baulkier
+Array[909]: proportionability
+Array[910]: -phony
+Array[911]: Aeolidae
+Array[912]: Cyrillaceae
+Array[913]: inaptly
+Array[914]: Amperian
+Array[915]: promptuary
+Array[916]: trophaea
+Array[917]: outsparkle
+Array[918]: epitheliomatous
+Array[919]: likerous
+Array[920]: undine
+Array[921]: valiseful
+Array[922]: Almagest
+Array[923]: sternway
+Array[924]: woad-painted
+Array[925]: Lupinus
+Array[926]: tilty
+Array[927]: nondichogamic
+Array[928]: sabre
+Array[929]: dislikeful
+Array[930]: Artocarpus
+Array[931]: refiners
+Array[932]: Seeder
+Array[933]: woomeras
+Array[934]: three-aisled
+Array[935]: twistical
+Array[936]: vermi-
+Array[937]: alefnull
+Array[938]: carpium
+Array[939]: Barboza
+Array[940]: astrometeorology
+Array[941]: coderives
+Array[942]: cursedest
+Array[943]: barogram
+Array[944]: coalitions
+Array[945]: talesman
+Array[946]: indols
+Array[947]: annunciation
+Array[948]: noncredibly
+Array[949]: vaccines
+Array[950]: well-accredited
+Array[951]: young-looking
+Array[952]: prize-fighter
+Array[953]: helming
+Array[954]: myelographically
+Array[955]: quasi-ethical
+Array[956]: straightforwardness
+Array[957]: squalliest
+Array[958]: girlhoods
+Array[959]: off-color
+Array[960]: bullit
+Array[961]: postponement
+Array[962]: hard-mouthed
+Array[963]: abortionist
+Array[964]: Cannstatt
+Array[965]: crumblingness
+Array[966]: rearhorse
+Array[967]: subemarginate
+Array[968]: inventory
+Array[969]: men-children
+Array[970]: cay
+Array[971]: reremmice
+Array[972]: ronnels
+Array[973]: liberalizations
+Array[974]: combinatorics
+Array[975]: rheumiest
+Array[976]: fire-retarded
+Array[977]: albolite
+Array[978]: drawings-in
+Array[979]: rumina
+Array[980]: peritoneoclysis
+Array[981]: neguses
+Array[982]: baggers
+Array[983]: chuter
+Array[984]: Naemorhedinae
+Array[985]: lophin
+Array[986]: dackered
+Array[987]: perigon
+Array[988]: serolipase
+Array[989]: theaterless
+Array[990]: autoimmunities
+Array[991]: calderas
+Array[992]: portmantle
+Array[993]: microstomatous
+Array[994]: Wenlock
+Array[995]: Altamahaw
+Array[996]: eye-lotion
+Array[997]: incorrupt
+Array[998]: cyclopentene
+Array[999]: antigovernment
+GG: Macrochires
+GG: stylopodium
+GG: dawn
+GG: ignoration
+GG: scrutinization
+GG: parviflorous
+GG: anemopathy
+GG: evocatory
+GG: inmate
+GG: rectricial
+GG: nonrelativity
+GG: Sango
+GG: quasi-realistic
+GG: Pan-Arabic
+GG: Hebrew
+GG: base-ball
+GG: antineutrons
+GG: stockwork
+GG: BSRT
+GG: Criders
+GG: Collbaith
+GG: legitim
+GG: rouged
+GG: nonbody
+GG: Selene
+GG: overmarch
+GG: vivificated
+GG: mesosomatic
+GG: multiview
+GG: athletism
+GG: amalgamation
+GG: gramineous
+GG: payably
+GG: cacodylate
+GG: lintiest
+GG: l-arterenol
+GG: Protobasidii
+GG: hyaloliparite
+GG: life-enriching
+GG: dollship
+GG: theorically
+GG: impressionable
+GG: screek
+GG: metal-sheathed
+GG: pellucidly
+GG: simianity
+GG: Germanton
+GG: Poiana
+GG: pre-emptor
+GG: transferrotype
+GG: Kiel
+GG: siccar
+GG: high-flavored
+GG: re-enjoy
+GG: interluency
+GG: wonton
+GG: skier
+GG: foreseat
+GG: Gymnasium
+GG: Min
+GG: catty-corner
+GG: perron
+GG: medics
+GG: Otariidae
+GG: Linanthus
+GG: florins
+GG: deafly
+GG: premodeled
+GG: spoons
+GG: horol.
+GG: Nierstein
+GG: gunreach
+GG: bonzer
+GG: imbitters
+GG: Gaige
+GG: syntactially
+GG: BUR
+GG: thoracicoacromial
+GG: primed
+GG: correctable
+GG: anticipatorily
+GG: AFB
+GG: sassandra
+GG: boanerges
+GG: accidentarily
+GG: statesboy
+GG: dosimetries
+GG: Keos
+GG: Sara
+GG: preponderate
+GG: red-swelling
+GG: wedgebill
+GG: overhoping
+GG: hallucinated
+GG: aminoazo
+GG: water-living
+GG: unsparred
+GG: regamble
+GG: overprint
+GG: Logi
+GG: swaths
+GG: hotch
+GG: triticism
+GG: Slavo-lithuanian
+GG: oxyluminescence
+GG: Keelung
+GG: therologist
+GG: unnitrogenous
+GG: bolting
+GG: orthoplasy
+GG: papalise
+GG: Viipuri
+GG: interdebating
+GG: ingratitudes
+GG: unbedecked
+GG: uninnocent
+GG: luffer
+GG: chondroitin
+GG: rust-cankered
+GG: Douglasville
+GG: mealymouthedness
+GG: nuts
+GG: subventitious
+GG: interpubic
+GG: amuyong
+GG: heart-hardened
+GG: saints
+GG: dissociality
+GG: benumbment
+GG: camillus
+GG: Lach
+GG: anthraquinol
+GG: Moche
+GG: nonprocedural
+GG: eucalyptic
+GG: precardiac
+GG: redespise
+GG: phytoecological
+GG: unpalled
+GG: sepulchres
+GG: Burrton
+GG: oil-laden
+GG: Bogalusa
+GG: bronchiloquy
+GG: Haughton
+GG: bementite
+GG: Anglo-afghan
+GG: beglerbegship
+GG: winches
+GG: antonomasia
+GG: presubscriber
+GG: Hazelcrest
+GG: Denn
+GG: dilling
+GG: Flindersia
+GG: equisetic
+GG: groundsman
+GG: brattishing
+GG: dysanagnosia
+GG: bastioned
+GG: reprimandingly
+GG: rose-hued
+GG: fogbows
+GG: aims
+GG: saloop
+GG: acidific
+GG: movie
+GG: unfrilled
+GG: Christ-borne
+GG: prosopographical
+GG: euphroes
+GG: oligacanthous
+GG: balneation
+GG: archgod
+GG: intraspecies
+GG: unsignificant
+GG: anti-Roman
+GG: pseudofluctuation
+GG: Chetnik
+GG: sauropsidan
+GG: Loxiinae
+GG: blowy
+GG: pyknoses
+GG: Morrison
+GG: apologete
+GG: ovoplasmic
+GG: vaporoseness
+GG: outflanks
+GG: turnmeter
+GG: acetabular
+GG: frumpish
+GG: adelantados
+GG: Tarnopol
+GG: matchboxes
+GG: pupfishes
+GG: reconfined
+GG: worldly-mindedness
+GG: major-leaguer
+GG: streamingly
+GG: consultants
+GG: Agricola
+GG: Robinsonville
+GG: sol
+GG: self-immurement
+GG: goose-quill
+GG: essayish
+GG: Polyctenidae
+GG: remerging
+GG: self-cruelty
+GG: gegger
+GG: unpredicably
+GG: wharfages
+GG: Leno
+GG: extrahazardous
+GG: nonmischievous
+GG: sulfurized
+GG: microdontous
+GG: confessionalian
+GG: palliditarsate
+GG: superinsist
+GG: backspang
+GG: fit
+GG: capework
+GG: circumradii
+GG: scabiophobia
+GG: treacheries
+GG: anallagmatis
+GG: stuber
+GG: miniver
+GG: dinsome
+GG: Creel
+GG: urinations
+GG: supplicatingly
+GG: fullfaces
+GG: smoothnesses
+GG: snowflower
+GG: crannogs
+GG: epihyal
+GG: platinamin
+GG: squirelet
+GG: marsalas
+GG: Tyndareus
+GG: index
+GG: tide-locked
+GG: Gauntlett
+GG: Asellidae
+GG: eccyclema
+GG: daisy-painted
+GG: navicerts
+GG: hinderance
+GG: nonparabolic
+GG: yerking
+GG: well-erected
+GG: quarterbacking
+GG: akhara
+GG: understriking
+GG: unconfinement
+GG: funicular
+GG: tuedian
+GG: unmaniable
+GG: bioelectrical
+GG: psalteteria
+GG: rewardingness
+GG: overcurtain
+GG: nitrotoluol
+GG: Illinois
+GG: phycocolloid
+GG: Spartansburg
+GG: 1080
+GG: morassy
+GG: -form
+GG: walkways
+GG: mites
+GG: Bhutia
+GG: diffidence
+GG: murthering
+GG: monoblepsis
+GG: nonalphabetically
+GG: anchietine
+GG: grayling
+GG: defaillance
+GG: inscribable
+GG: predestinationism
+GG: leach
+GG: yachtmanship
+GG: debuted
+GG: mammilliform
+GG: Wovoka
+GG: phantic
+GG: lame-brain
+GG: vesico-umbilical
+GG: chloroleucite
+GG: six-shafted
+GG: foolmonger
+GG: merrymake
+GG: forebespeak
+GG: claros
+GG: handbells
+GG: Politian
+GG: scarcen
+GG: brain-crumpled
+GG: unseemingly
+GG: chawbuck
+GG: superscribe
+GG: baby-face
+GG: unpetted
+GG: Mangifera
+GG: felonwort
+GG: riddled
+GG: pinnoite
+GG: polyphyletically
+GG: Hulme
+GG: Pucciniaceae
+GG: swindlership
+GG: Nolanville
+GG: pastors
+GG: appersonation
+GG: postdiscoidal
+GG: Susy
+GG: patroclinous
+GG: home-loving
+GG: Zoanthus
+GG: slim-waisted
+GG: Deschutes
+GG: unpuckers
+GG: seacatch
+GG: landlike
+GG: poach
+GG: retransplants
+GG: besnowing
+GG: Judean
+GG: practicableness
+GG: spacetime
+GG: SMASPU
+GG: unbreakable
+GG: titanoniobate
+GG: misdeserve
+GG: Plumularia
+GG: Laertiades
+GG: nontropical
+GG: abulic
+GG: unvulgarized
+GG: Volos
+GG: egoistic
+GG: Gardnerville
+GG: both
+GG: coparent
+GG: Xenocrates
+GG: emma
+GG: desponder
+GG: raspy
+GG: browsability
+GG: doolfu
+GG: gammerel
+GG: setarious
+GG: pessimism
+GG: prescribable
+GG: howling
+GG: contradictory
+GG: well-prosecuted
+GG: awabi
+GG: white-fleshed
+GG: table-faced
+GG: Neopilina
+GG: Sebright
+GG: competencies
+GG: hysteriac
+GG: BLOBS
+GG: Cetraria
+GG: processionalist
+GG: entangler
+GG: gonal
+GG: oreodontine
+GG: go-getterism
+GG: Ali
+GG: concordant
+GG: freehandedness
+GG: Wascott
+GG: trachelo-
+GG: belick
+GG: Lycopodiales
+GG: ungradually
+GG: muster-out
+GG: semidisk
+GG: wigs
+GG: hag
+GG: actuaries
+GG: tatters
+GG: kneehole
+GG: retabulate
+GG: homoptera
+GG: bord-and-pillar
+GG: kahawai
+GG: stagnates
+GG: rennase
+GG: edward
+GG: herbrough
+GG: DP
+GG: Tupis
+GG: wappenschaw
+GG: Pennatulidae
+GG: nudniks
+GG: broadband
+GG: Gildea
+GG: dusenwind
+GG: revealingness
+GG: semble
+GG: chelonin
+GG: guaiocums
+GG: aptly
+GG: pseudoskink
+GG: elevons
+GG: undecreasingly
+GG: wrothsome
+GG: elaine
+GG: armorist
+GG: philotechnical
+GG: Waylan
+GG: summered
+GG: topsiders
+GG: Nimocks
+GG: feudists
+GG: Iva
+GG: calories
+GG: Buerger
+GG: multibreak
+GG: zorils
+GG: sipidity
+GG: stoothing
+GG: butterflylike
+GG: lecanoscopic
+GG: listable
+GG: bridoons
+GG: Raninae
+GG: fortyish
+GG: cancellated
+GG: diaplexus
+GG: omnifacial
+GG: harsh-grating
+GG: carabideous
+GG: psychoprophylaxis
+GG: lituiform
+GG: subpeltated
+GG: synaptene
+GG: undermanning
+GG: still-continuing
+GG: shallow-brained
+GG: paraphilia
+GG: telecinematography
+GG: ethanols
+GG: irritative
+GG: sensiferous
+GG: untimbered
+GG: shriller
+GG: news-seeking
+GG: fluorinates
+GG: obsessiveness
+GG: mercantility
+GG: dungannonite
+GG: BEE
+GG: clearinghouse
+GG: banjo
+GG: mashing
+GG: Doelling
+GG: trichocystic
+GG: ferocity
+GG: Kasubian
+GG: ruby-eyed
+GG: peregrinations
+GG: allochromatic
+GG: coccus
+GG: residentially
+GG: self-repugnance
+GG: Hochman
+GG: bitter-endism
+GG: Maeander
+GG: maras
+GG: Aggarwal
+GG: Casatus
+GG: adjustage
+GG: Millda
+GG: raffishnesses
+GG: malfunction
+GG: syllabary
+GG: nonsubstitution
+GG: outbear
+GG: cerebellums
+GG: Chaldaical
+GG: counterchanged
+GG: dicoelous
+GG: glassblower
+GG: unstrengthening
+GG: outperform
+GG: Cos
+GG: telosynaptic
+GG: delayage
+GG: louisville
+GG: covariant
+GG: jampan
+GG: stentorine
+GG: chronotropism
+GG: penuckles
+GG: Viscount
+GG: deganglionate
+GG: Rhynd
+GG: think
+GG: centranth
+GG: tsimmes
+GG: surfeit-swelled
+GG: sneaped
+GG: monopody
+GG: unhent
+GG: gloat
+GG: kyanol
+GG: zephyr-fanned
+GG: excitingly
+GG: holl
+GG: unitemized
+GG: purushartha
+GG: farthings
+GG: cardamine
+GG: coffee-brown
+GG: ultracrepidarian
+GG: Half-moslem
+GG: unenterable
+GG: crystallizations
+GG: phenotype
+GG: sadhika
+GG: assonantic
+GG: reinspire
+GG: computerizes
+GG: schoolbooks
+GG: row-boat
+GG: ironheartedly
+GG: subjunct
+GG: pleasure-tired
+GG: Darra
+GG: osoberry
+GG: decriminalization
+GG: unmitred
+GG: escallops
+GG: finespun
+GG: tafwiz
+GG: diachyma
+GG: RITA
+GG: while
+GG: tam-o'-shanter
+GG: Lavallette
+GG: Kitasato
+GG: relegating
+GG: sextodecimos
+GG: expectorant
+GG: mauds
+GG: Scorpaenidae
+GG: auxology
+GG: cotillage
+GG: trueheartedly
+GG: betroths
+GG: unsafeguarded
+GG: seminasal
+GG: outyells
+GG: unfinable
+GG: hydrolytically
+GG: wisha
+GG: prohydrotropic
+GG: cormogen
+GG: preinquisition
+GG: hylology
+GG: hypolimnionia
+GG: pedocal
+GG: planform
+GG: transporters
+GG: gnomists
+GG: neshly
+GG: quadrifrontal
+GG: cut-price
+GG: photomacrography
+GG: noncompensating
+GG: soreheads
+GG: gallicola
+GG: afterdrain
+GG: winkled
+GG: Obeid
+GG: uniform
+GG: spring-board
+GG: clumproot
+GG: packinghouse
+GG: nonfeasibility
+GG: oddness
+GG: novelised
+GG: fadding
+GG: songlike
+GG: respring
+GG: prevariation
+GG: gourdworm
+GG: Pyrosomatidae
+GG: uncorven
+GG: Araxa
+GG: techiness
+GG: bleached
+GG: shide
+GG: hook-snouted
+GG: MFT
+GG: superdevilishly
+GG: catechizer
+GG: Treron
+GG: RIM
+GG: intendency
+GG: entrapment
+GG: tripaschal
+GG: heyduck
+GG: spirit-chilling
+GG: Changoan
+GG: all-availing
+GG: unagreed
+GG: whoremongering
+GG: immunogenetic
+GG: mislighting
+GG: semisocialistically
+GG: korona
+GG: sperone
+GG: Berkley
+GG: Rallinae
+GG: Audras
+GG: glucosidase
+GG: arsenetted
+GG: longhairs
+GG: unexplainably
+GG: halbert
+GG: castles
+GG: readdicting
+GG: Mansura
+GG: towelry
+GG: civilise
+GG: Violaceae
+GG: vice-architect
+GG: impersonate
+GG: keynesian
+GG: aspheric
+GG: demagnetized
+GG: pig-footed
+GG: hemihedron
+GG: Jezabella
+GG: trigonometrical
+GG: fricandelle
+GG: Ector
+GG: toccate
+GG: antecedaneous
+GG: heterophagous
+GG: USSCt
+GG: nose-up
+GG: noonday
+GG: ventricolumna
+GG: spectroheliography
+GG: kinetomeric
+GG: silicifluoride
+GG: unarousable
+GG: Sharpsburg
+GG: falderols
+GG: shittier
+GG: sieva
+GG: soller
+GG: byssi
+GG: cell
+GG: preacquitting
+GG: Nanuet
+GG: Derbent
+GG: Beckman
+GG: isosulphocyanate
+GG: deperdite
+GG: montmorillonitic
+GG: bilinguist
+GG: Jack-the-rags
+GG: ambulacrum
+GG: quincewort
+GG: breech-loading
+GG: soundheartedness
+GG: commissionating
+GG: clinah
+GG: Erma
+GG: Monahon
+GG: prefertility
+GG: grip
+GG: emyde
+GG: Elsey
+GG: orality
+GG: terrestriality
+GG: nonheritability
+GG: embolimeal
+GG: spifflicate
+GG: subchief
+GG: Balanta
+GG: tony
+GG: ionomers
+GG: Midway
+GG: inexistency
+GG: Tazewell
+GG: frolicful
+GG: djakarta
+GG: Stannwood
+GG: Scheel
+GG: nonsegregable
+GG: misshaped
+GG: dandy-roller
+GG: cross-pawl
+GG: deciduitis
+GG: heirship
+GG: preconfiguration
+GG: Torun
+GG: fiddle-faddled
+GG: slows
+GG: child-mindedness
+GG: flavorousness
+GG: Francoist
+GG: thy
+GG: cunningness
+GG: tepetate
+GG: expurgational
+GG: cps
+GG: jorums
+GG:--7583-- REDIR: 0x4ec63c0 (libc.so.6:strcmp) redirected to 0x4a247af (_vgnU_ifunc_wrapper)
+--7583-- REDIR: 0x4f79fc0 (libc.so.6:__strcmp_sse42) redirected to 0x4c31a50 (__strcmp_sse42)
+--7583-- REDIR: 0x4ec7e60 (libc.so.6:__GI_strlen) redirected to 0x4c308f0 (__GI_strlen)
+ inflexion
+GG: pixies
+GG: steel-digesting
+GG: ornary
+GG: electrography
+GG: Opilia
+GG: hyperelegantly
+GG: Potosi
+GG: bidgee-widgee
+GG: bout
+GG: kodaking
+GG: Jenette
+GG: rogueling
+GG: single-hoofed
+GG: yawney
+GG: sunspottery
+GG: Cariocan
+GG: skyjacks
+GG: tewly
+GG: acroataxia
+GG: conveyability
+GG: Cahuapana
+GG: Qum
+GG: scissor-winged
+GG: gaster-
+GG: ten-dollar
+GG: birds
+GG: underclift
+GG: Pan-mongolian
+GG: pro-Egyptian
+GG: misanthropi
+GG: chirimen
+GG: aywhere
+GG: adsmith
+GG: plie
+GG: isocarbostyril
+GG: parotidean
+GG: unwry
+GG: uppent
+GG: endophasia
+GG: neuroplasm
+GG: hissel
+GG: velds
+GG: she-fool
+GG: attatches
+GG: overbookish
+GG: coracomandibular
+GG: Pimpinella
+GG: Levant
+GG: tapadera
+GG: maat
+GG: Engedi
+GG: poppy-flowered
+GG: demodulator
+GG: overshadower
+GG: raclettes
+GG: pulpitical
+GG: unlearnableness
+GG: countersconce
+GG: close-bred
+GG: junks
+GG: earthiest
+GG: proud-minded
+GG: disponed
+GG: colophonate
+GG: paradigm
+GG: Vasti
+GG: unduchess
+GG: Ucalegon
+GG: tweed
+GG: vrows
+GG: megaton
+GG: drunkest
+GG: Habiru
+GG: Tetrabelodon
+GG: palatomaxillary
+GG: toluyl
+GG: hypersuggestibleness
+GG: samites
+GG: Fusulina
+GG: flamelike
+GG: pettygod
+GG: Auster
+GG: unrespectiveness
+GG: kangaroo-rat
+GG: ghostcraft
+GG: Piscataqua
+GG: graphiological
+GG: Arica
+GG: Croesus
+GG: greeny
+GG: ichorrhemia
+GG: disassembler
+GG: enneahedral
+GG: splenolymphatic
+GG: zamarra
+GG: Geoffry
+GG: consence
+GG: fourteens
+GG: neck-tie
+GG: nonirate
+GG: parental
+GG: detritus
+GG: uncensured
+GG: umpteenth
+GG: twice-negotiated
+GG: exhilarator
+GG: intervisitation
+GG: Charlena
+GG: mucronated
+GG: Ongun
+GG: epencephalons
+GG: generous-hearted
+GG: encoring
+GG: Krusche
+GG: Huntersville
+GG: black-tressed
+GG: jocooserie
+GG: inclinable
+GG: motiving
+GG: pickthatch
+GG: abeigh
+GG: Myrtle
+GG: wage-plug
+GG: latibulize
+GG: overtensely
+GG: beanbag
+GG: Oceola
+GG: untwist
+GG: rebounded
+GG: stripteased
+GG: instigated
+GG: ditches
+GG: conichalcite
+GG: shortenings
+GG: opaled
+GG: herrenvolk
+GG: rehaul
+GG: fantailed
+GG: methobromide
+GG: unclouding
+GG: coinquinate
+GG: throned
+GG: Brabazon
+GG: lobotomized
+GG: Marilou
+GG: trainmaster
+GG: Ardra
+GG: drivellingly
+GG: Lerona
+GG: jaunder
+GG: idiasm
+GG: overextends
+GG: disconvenient
+GG: Aphelops
+GG: suffixion
+GG: disfellowship
+GG: laparohepatotomy
+GG: filbert
+GG: cinderman
+GG: sociogram
+GG: pompoms
+GG: painkilling
+GG: Mahabharata
+GG: dudine
+GG: Hannastown
+GG: Henka
+GG: mazes
+GG: ravishedly
+GG: peats
+GG: fault-slip
+GG: nasiform
+GG: devouringly
+GG: substalagmite
+GG: uraline
+GG: Melisandra
+GG: non-English
+GG: cufflinks
+GG: unredemptive
+GG: guidwife
+GG: Evans
+GG: anise
+GG: unsymbolized
+GG: tinkerwise
+GG: repenalize
+GG: recidivous
+GG: dipppier
+GG: quenelle
+GG: baulkier
+GG: proportionability
+GG: -phony
+GG: Aeolidae
+GG: Cyrillaceae
+GG: inaptly
+GG: Amperian
+GG: promptuary
+GG: trophaea
+GG: outsparkle
+GG: epitheliomatous
+GG: likerous
+GG: undine
+GG: valiseful
+GG: Almagest
+GG: sternway
+GG: woad-painted
+GG: Lupinus
+GG: tilty
+GG: nondichogamic
+GG: sabre
+GG: dislikeful
+GG: Artocarpus
+GG: refiners
+GG: Seeder
+GG: woomeras
+GG: three-aisled
+GG: twistical
+GG: vermi-
+GG: alefnull
+GG: carpium
+GG: Barboza
+GG: astrometeorology
+GG: coderives
+GG: cursedest
+GG: barogram
+GG: coalitions
+GG: talesman
+GG: indols
+GG: annunciation
+GG: noncredibly
+GG: vaccines
+GG: well-accredited
+GG: young-looking
+GG: prize-fighter
+GG: helming
+GG: myelographically
+GG: quasi-ethical
+GG: straightforwardness
+GG: squalliest
+GG: girlhoods
+GG: off-color
+GG: bullit
+GG: postponement
+GG: hard-mouthed
+GG: abortionist
+GG: Cannstatt
+GG: crumblingness
+GG: rearhorse
+GG: subemarginate
+GG: inventory
+GG: men-children
+GG: cay
+GG: reremmice
+GG: ronnels
+GG: liberalizations
+GG: combinatorics
+GG: rheumiest
+GG: fire-retarded
+GG: albolite
+GG: drawings-in
+GG: rumina
+GG: peritoneoclysis
+GG: neguses
+GG: baggers
+GG: chuter
+GG: Naemorhedinae
+GG: lophin
+GG: dackered
+GG: perigon
+GG: serolipase
+GG: theaterless
+GG: autoimmunities
+GG: calderas
+GG: portmantle
+GG: microstomatous
+GG: Wenlock
+GG: Altamahaw
+GG: eye-lotion
+GG: incorrupt
+GG: cyclopentene
+GG: antigovernment
+Index_Count: 1000
+Comparing scrutinization
+ and stylopodium
+strcmp Working
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Append
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+Before
+==7583== 
+==7583== HEAP SUMMARY:
+==7583==     in use at exit: 300,000 bytes in 1,000 blocks
+==7583==   total heap usage: 2,004 allocs, 1,004 frees, 333,168 bytes allocated
+==7583== 
+==7583== Searching for pointers to 1,000 not-freed blocks
+==7583== Checked 70,272 bytes
+==7583== 
+==7583== 300,000 bytes in 1,000 blocks are definitely lost in loss record 1 of 1
+==7583==    at 0x4C2F7C8: calloc (vg_replace_malloc.c:1117)
+==7583==    by 0x40137A: main (Lex.c:56)
+==7583== 
+==7583== LEAK SUMMARY:
+==7583==    definitely lost: 300,000 bytes in 1,000 blocks
+==7583==    indirectly lost: 0 bytes in 0 blocks
+==7583==      possibly lost: 0 bytes in 0 blocks
+==7583==    still reachable: 0 bytes in 0 blocks
+==7583==         suppressed: 0 bytes in 0 blocks
+==7583== 
+==7583== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
